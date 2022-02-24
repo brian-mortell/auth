@@ -1,3 +1,4 @@
+<% if @current_user %>
 <h1>Do the TODOs</h1>
 
 <%= form_with model: @task do |form| %>
@@ -6,7 +7,7 @@
 <% end %>
 
 <table>
-  <% for task in @tasks %>
+  <% for task in @tasks.where({ user_id: @current_user.id }) %>
     <tr>
       <td>
         <%= task.description %>
@@ -17,3 +18,5 @@
     </tr>
   <% end %>
 </table>
+
+<% end %>
